@@ -7,8 +7,8 @@ import (
 	service "github.com/rexliu0715/go-aws/services"
 )
 
-func NewService(options config.LoadOptions) (*service.Service, error) {
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(options.Region))
+func NewService(optFns ...func(*config.LoadOptions) error) (*service.Service, error) {
+	cfg, err := config.LoadDefaultConfig(context.TODO(), optFns...)
 	if err != nil {
 		return nil, err
 	}
